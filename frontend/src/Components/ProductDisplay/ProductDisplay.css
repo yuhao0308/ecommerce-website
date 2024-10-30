@@ -158,6 +158,27 @@
   font-weight: bold;
   color: #333;
 }
+
+/* Bounce Animation */
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Add a bounce effect when clicked */
+.bounce {
+  animation: bounce 0.3s ease;
+}
+
 @media (max-width: 1024px) {
   .productdisplay {
     flex-direction: column;

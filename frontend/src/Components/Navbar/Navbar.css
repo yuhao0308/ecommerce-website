@@ -11,7 +11,7 @@
   margin-top: 15px;
 }
 
-.first-layer{
+.first-layer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -44,6 +44,15 @@
   gap: 10px;
 }
 
+.cart-icon-container {
+  position: relative;
+}
+
+.nav-login-cart img {
+  position: relative;
+  z-index: 1;
+}
+
 .nav-login-cart button {
   width: 140px;
   height: 48px;
@@ -62,20 +71,19 @@
 }
 
 .nav-cart-count {
-  /* position: absolute; */
-  /* top: -8px;
-  right: -8px; */
+  position: absolute;
+  top: -8px;
+  right: -8px;
   width: 22px;
   height: 22px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -30px;
-  margin-left: -25px;
   border-radius: 50%;
   background-color: red;
   color: white;
   font-size: 14px;
+  z-index: 2;
 }
 
 .nav-menu {
@@ -107,10 +115,63 @@
   border-radius: 10px;
 }
 
+/* Firecracker animation styles */
+.firecracker-particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: red;
+  transform: translate(-50%, -50%);
+  animation: firecracker-animation 1s forwards;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes firecracker-animation {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.6);
+  }
+
+  50% {
+    transform: scale(0.9);
+  }
+
+  75% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bounce {
+  animation: bounce 0.5s ease;
+}
+
 @media (max-width: 600px) {
   .nav-menu {
-      gap: 40px;
-    }
+    gap: 40px;
+  }
 
   .nav-menu li {
     font-size: 22px;

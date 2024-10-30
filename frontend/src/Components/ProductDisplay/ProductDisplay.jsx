@@ -1,12 +1,26 @@
-import React, { useContext } from 'react'
-import './ProductDisplay.css'
-import star_icon from '../Assets/star_icon.png'
-import start_dull_icon from '../Assets/star_dull_icon.png'
-import { ShopContext } from '../../Context/ShopContext'
+import React, { useContext, useState } from 'react';
+import './ProductDisplay.css';
+import star_icon from '../Assets/star_icon.png';
+import start_dull_icon from '../Assets/star_dull_icon.png';
+import { ShopContext } from '../../Context/ShopContext';
 
 const ProductDisplay = (props) => {
-    const {product} = props;
-    const {addToCart} = useContext(ShopContext);
+  const { product } = props;
+  const { addToCart } = useContext(ShopContext);
+  const [isBouncing, setIsBouncing] = useState(false);
+
+  const handleAddToCart = () => {
+    addToCart(product.id);
+
+    // Add bounce animation
+    setIsBouncing(true);
+
+    // Remove bounce class after animation ends
+    setTimeout(() => {
+      setIsBouncing(false);
+    }, 300); // Duration matches the animation time in CSS
+  };
+
   return (
     <div className="productdisplay">
       <div className="productdisplay-left">
@@ -17,7 +31,7 @@ const ProductDisplay = (props) => {
           <img src={product.image} alt="" />
         </div>
         <div className="productdisplay-img">
-          <img className='productdisplay-main-img'src={product.image} alt="" />
+          <img className="productdisplay-main-img" src={product.image} alt="" />
         </div>
       </div>
       <div className="productdisplay-right">
@@ -47,12 +61,17 @@ const ProductDisplay = (props) => {
             <div>XXL</div>
           </div>
         </div>
-        <button onClick={()=>{addToCart(product.id)}}>ADD TO CART</button>
-        <p className='productdisplay-right-category'><span>Category: </span>Women, T-shirt, Crop Top</p>
-        <p className='productdisplay-right-category'><span>Tags: </span>Modern, Latest</p>
+        <button
+          onClick={handleAddToCart}
+          className={isBouncing ? 'bounce' : ''}
+        >
+          ADD TO CART
+        </button>
+        <p className="productdisplay-right-category"><span>Category: </span>Women, T-shirt, Crop Top</p>
+        <p className="productdisplay-right-category"><span>Tags: </span>Modern, Latest</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductDisplay
+export default ProductDisplay;
